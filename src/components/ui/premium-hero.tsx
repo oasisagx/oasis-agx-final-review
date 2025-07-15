@@ -77,7 +77,7 @@ const PremiumHero: React.FC<PremiumHeroProps> = ({
                 onClick={onCtaPrimaryClick}
                 className="inline-flex items-center justify-center px-6 py-3 bg-oasis-blue hover:bg-oasis-blue-dark text-white font-semibold rounded-lg transition-all duration-200 font-body text-base shadow-medium hover:shadow-strong"
               >
-                Quero beber água limpa
+                {ctaPrimaryText}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>

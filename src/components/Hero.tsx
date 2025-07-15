@@ -22,9 +22,9 @@ const Hero = () => {
       <PremiumHero
         headline="Tudo o que você precisa para beber água limpa na era da IA"
         subheadline="Soluções autônomas e inteligentes que trazem eficiência e produtividade para suas operações."
-        ctaPrimaryText="Ver Demonstração"
+        ctaPrimaryText="Quero beber água limpa"
         ctaSecondaryText="Agendar Consultoria"
-        onCtaPrimaryClick={() => scrollToSection('agents')}
+        onCtaPrimaryClick={() => window.open('https://wa.me/5511918688001?text=Olá! Gostaria de saber mais sobre os agentes de IA da Oasis.', '_blank')}
         onCtaSecondaryClick={() => scrollToSection('about')}
       />
     </section>
