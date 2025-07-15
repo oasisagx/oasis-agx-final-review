@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables - ONLY Light Mode with EXACT Palette */
+:root {
+  /* EXACT PALETTE - Only Approved Colors */
+  --oasis-blue: #5B9AE1;        /* Primary blue */
+  --oasis-blue-dark: #4A8BD8;   /* Darker blue for hover states */
+  --oasis-blue-light: #E8F2FD;  /* Light blue for backgrounds */
+
+  /* Background System - EXACT COLORS */
+  --background: #F8FAFC;         /* Main background */
+  --card-background: #FFFFFF;    /* Cards and containers */
+  
+  /* Text System - High Contrast for Readability */
+  --text-primary: #000000;       /* Main headings - BLACK */
+  --text-secondary: #1e293b;     /* Secondary headings - Dark gray */
+  --text-body: #475569;          /* Body text - Medium gray */
+  --text-muted: #64748b;         /* Muted text - Light gray */
+
+  /* Functional Colors - Only Essential */
+  --success: #10b981;           /* Success states */
+  --warning: #f59e0b;           /* Warning states */
+  --error: #ef4444;             /* Error states */
+  --whatsapp: #25d366;          /* WhatsApp brand */
+
+  /* Borders and Neutrals */
+  --border-light: #e2e8f0;      /* Light borders */
+  --border-medium: #cbd5e1;     /* Medium borders */
+
+  /* Shadows - Clean and minimal */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  --navbar-height: 80px;
+  --navbar-height-mobile: 60px;
+}
+
+/* Base Styles */
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Typography Classes */
+.font-heading {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.font-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Apply font classes to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: var(--text-primary);
+}
+
+/* Apply font classes to body text */
+p, span, div, button, input, textarea, label {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Component Styles */
+.dashboard-consistency {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.icon-monochrome {
+  color: var(--oasis-blue);
+}
+
+.btn-hover-lift {
+  transition: all 0.2s ease;
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(91, 154, 225, 0.25);
+}
+
+/* Clean Navbar Styles */
+.navbar-blur {
+  background: rgba(248, 250, 252, 0.95);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-medium {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-strong {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile Menu Animation */
+.mobile-menu-line {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-active .mobile-menu-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-active .mobile-menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-active .mobile-menu-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Form Styles */
+.form-input-focus {
+  transition: all 0.2s ease;
+}
+
+.form-input-focus:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(91, 154, 225, 0.2);
+}
+
+/* Floating Button Animations */
+.floating-btn {
+  transition: all 0.3s ease;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Scroll Animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.scroll-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fix para sobreposição das imagens da equipe */
+.scroll-animate {
+  position: relative;
+  z-index: 1;
+}
+
+/* Garantir que o header tenha z-index maior */
+.navbar {
+  z-index: 50;
+}
+
+/* Garantir que as imagens da equipe não sobreponham o header */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* CTA Button Styles */
+.cta-standard {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid transparent;
+}
+
+@media (min-width: 640px) {
+  .cta-standard {
+    padding: 16px 32px;
+    font-size: 16px;
+    min-height: 56px;
+  }
+}
+
+.cta-primary {
+  background-color: var(--oasis-blue);
+  color: white;
+  border-color: var(--oasis-blue);
+}
+
+.cta-primary:hover {
+  background-color: var(--oasis-blue-dark);
+  border-color: var(--oasis-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(91, 154, 225, 0.25);
+}
+
+.cta-secondary {
+  background-color: transparent;
+  color: var(--oasis-blue);
+  border-color: var(--oasis-blue);
+}
+
+.cta-secondary:hover {
+  background-color: var(--oasis-blue);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(91, 154, 225, 0.25);
+}
+
+/* Section Styles */
+.section-with-opacity {
+  background-color: transparent;
+}
+
+.consultancy-card-title {
+  transition: color 0.3s ease;
+}
+
+.consultancy-card:hover .consultancy-card-title {
+  color: var(--oasis-blue);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .cta-standard {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .mobile-menu-line {
+    height: 2px;
+    margin: 4px 0;
+  }
+  
+  h1, h2, h3 {
+    line-height: 1.2;
+  }
+  
+  p, span, div {
+    line-height: 1.5;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-float,
+  .floating-btn {
+    animation: none !important;
+  }
+}
+
+/* Image optimization */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+.logo-critical {
+  loading: eager;
+}
