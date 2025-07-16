@@ -32,10 +32,10 @@ const Footer = () => {
                 alt="Oasis AGX" 
                 className="h-6 sm:h-8 w-auto"
               />
-              <span className="text-lg sm:text-xl font-bold font-heading">Oasis AGX</span>
+              <span className="text-lg sm:text-xl font-bold font-heading">Oasis</span>
             </div>
             <p className="text-gray-400 text-xs sm:text-sm mb-1 sm:mb-2 font-body">
-              © 2024 Oasis AGX. Todos os direitos reservados.
+              © 2024 Oasis. Todos os direitos reservados.
             </p>
             <p className="text-gray-500 text-xs sm:text-sm font-medium font-body">
               Inteligência Artificial. Resultados Reais.
@@ -79,7 +79,7 @@ const Footer = () => {
           {/* Right side - Social Links */}
           <div className="flex items-center gap-3 sm:gap-4">
             <a
-              href="https://br.linkedin.com/in/francisco-gregori"
+              href="https://www.linkedin.com/company/oasisagx/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 sm:w-10 h-8 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
@@ -90,7 +90,9 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/oasis.agx/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-8 sm:w-10 h-8 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
               aria-label="Instagram"
             >

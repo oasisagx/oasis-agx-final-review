@@ -54,7 +54,7 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Equipe - Grid das imagens como estava */}
-        <div
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -65,7 +65,7 @@ const AboutSection = () => {
             autoplay={true}
             className="px-0"
           />
-        </div>
+        </motion.div>
 
         {/* Texto embaixo da equipe */}
         <motion.div
@@ -117,10 +117,10 @@ const AboutSection = () => {
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2 font-heading">Email</h4>
                 <a 
-                  href="mailto:hello@oasisagx.com"
+                  href="mailto:hello@oasis.com"
                   className="text-oasis-blue hover:text-oasis-blue-dark font-medium font-body transition-colors"
                 >
-                  hello@oasisagx.com
+                  hello@oasis.com
                 </a>
               </div>
               
@@ -149,12 +149,12 @@ const AboutSection = () => {
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2 font-heading">LinkedIn</h4>
                 <a 
-                  href="https://br.linkedin.com/in/francisco-gregori"
+                  href="https://www.linkedin.com/company/oasisagx/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-oasis-blue hover:text-oasis-blue-dark font-medium font-body transition-colors"
                 >
-                  Oasis AGX
+                  Oasis
                 </a>
               </div>
               
@@ -167,10 +167,12 @@ const AboutSection = () => {
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2 font-heading">Instagram</h4>
                 <a 
-                  href="#"
+                  href="https://www.instagram.com/oasis.agx/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-oasis-blue hover:text-oasis-blue-dark font-medium font-body transition-colors"
                 >
-                  @oasisagx
+                  @oasis.agx
                 </a>
               </div>
             </div>
