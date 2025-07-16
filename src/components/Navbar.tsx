@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 
 const Navbar = () => {
@@ -84,12 +85,12 @@ const Navbar = () => {
               <div className="w-px h-6 bg-gray-200"></div>
               
               {/* CTA Button */}
-              <button
-                onClick={() => window.open('https://dashboard-oasis-v2.netlify.app/', '_blank')}
+              <Link
+                to="/login"
                 className="px-3 py-2 text-xs font-medium text-oasis-blue hover:text-white border border-oasis-blue/30 hover:border-oasis-blue rounded-lg transition-all duration-200 font-body hover:bg-oasis-blue"
               >
                 Oasis MED
-              </button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -149,12 +150,12 @@ const Navbar = () => {
               >
                 Contato
               </button>
-              <button
-                onClick={() => window.open('https://dashboard-oasis-v2.netlify.app/', '_blank')}
-                className="w-full px-4 py-3 text-sm font-medium text-oasis-blue hover:text-white border border-oasis-blue hover:bg-oasis-blue rounded-lg transition-all duration-200 font-body mt-6"
+              <Link
+                to="/login"
+                className="w-full block text-center px-4 py-3 text-sm font-medium text-oasis-blue hover:text-white border border-oasis-blue hover:bg-oasis-blue rounded-lg transition-all duration-200 font-body mt-6"
               >
                 Oasis MED
-              </button>
+              </Link>
             </div>
           </div>
         </div>

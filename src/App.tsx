@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import { Features } from './components/ui/features';
@@ -8,6 +9,7 @@ import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import FloatingButtons from './components/FloatingButtons';
 import { AuroraBackground } from './components/ui/aurora-background';
+import Login from './components/Login';
 
 function App() {
   useEffect(() => {
@@ -37,16 +39,23 @@ function App() {
   }, []);
 
   return (
-    <AuroraBackground className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Features />
-      <ConsultancySection />
-      <TestimonialSection />
-      <AboutSection />
-      <Footer />
-      <FloatingButtons />
-    </AuroraBackground>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={
+          <AuroraBackground className="min-h-screen">
+            <Navbar />
+            <Hero />
+            <Features />
+            <ConsultancySection />
+            <TestimonialSection />
+            <AboutSection />
+            <Footer />
+            <FloatingButtons />
+          </AuroraBackground>
+        } />
+      </Routes>
+    </Router>
   );
 }
 
