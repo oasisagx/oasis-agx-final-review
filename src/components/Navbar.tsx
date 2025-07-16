@@ -91,7 +91,7 @@ const Navbar = () => {
               {/* CTA Button */}
               <Link
                 to="/login"
-                className="px-3 py-2 text-xs font-medium text-oasis-blue-med hover:text-white border border-oasis-blue-med/30 hover:border-oasis-blue-med rounded-lg transition-all duration-200 font-body hover:bg-oasis-blue-med"
+                className="px-3 py-2 text-xs font-medium text-oasis-blue-med hover:text-white border-2 border-oasis-blue-med/30 hover:border-oasis-blue-med rounded-lg transition-all duration-200 font-body hover:bg-oasis-blue-med"
               >
                 Oasis MED
               </Link>
@@ -156,7 +156,7 @@ const Navbar = () => {
               </button>
               <Link
                 to="/login"
-                className="w-full block text-center px-4 py-3 text-sm font-medium text-oasis-blue-med hover:text-white border border-oasis-blue-med hover:bg-oasis-blue-med rounded-lg transition-all duration-200 font-body mt-6"
+                className="w-full block text-center px-4 py-3 text-sm font-medium text-oasis-blue-med hover:text-white border-2 border-oasis-blue-med hover:bg-oasis-blue-med rounded-lg transition-all duration-200 font-body mt-6"
               >
                 Oasis MED
               </Link>
