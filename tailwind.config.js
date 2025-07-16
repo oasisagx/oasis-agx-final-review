@@ -10,7 +10,8 @@ export default {
       colors: {
         // EXACT Oasis color system - Light mode only
         'oasis-blue': '#5B9AE1',           // Primary blue
-        'oasis-blue-dark': '#4A8BD8',      // Darker blue for hover states
+        'oasis-blue-med': '#4A8BD8',       // Medium blue for buttons
+        'oasis-blue-dark': '#3A7BC4',      // Darker blue for hover states
         'oasis-blue-light': '#E8F2FD',     // Light blue for backgrounds
         
         // Background system - EXACT COLORS

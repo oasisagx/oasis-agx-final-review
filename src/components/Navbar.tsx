@@ -44,50 +44,54 @@ const Navbar = () => {
               <img 
                 src="/images/logos/oasis-logo.svg" 
                 alt="Oasis AGX" 
-                className="h-10 md:h-12 w-auto transition-all duration-300"
+                className="h-14 md:h-16 w-auto transition-all duration-300"
               />
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              <button
-                onClick={() => scrollToSection('agents')}
-                className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
-              >
-                Agentes de IA
-              </button>
-              <button
-                onClick={() => scrollToSection('consultancy')}
-                className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
-              >
-                Consultoria em IA
-              </button>
-              <button
-                onClick={() => scrollToSection('testimonial')}
-                className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
-              >
-                Clientes
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
-              >
-                Quem Somos
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
-              >
-                Contato
-              </button>
-              
+            <div className="hidden lg:flex flex-grow items-center justify-center">
+              <div className="flex items-center space-x-6 xl:space-x-8">
+                <button
+                  onClick={() => scrollToSection('agents')}
+                  className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
+                >
+                  Agentes de IA
+                </button>
+                <button
+                  onClick={() => scrollToSection('consultancy')}
+                  className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
+                >
+                  Consultoria em IA
+                </button>
+                <button
+                  onClick={() => scrollToSection('testimonial')}
+                  className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
+                >
+                  Clientes
+                </button>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
+                >
+                  Quem Somos
+                </button>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
+                >
+                  Contato
+                </button>
+              </div>
+            </div>
+
+            <div className="hidden lg:flex items-center">
               {/* Divider */}
-              <div className="w-px h-6 bg-gray-200"></div>
+              <div className="w-px h-6 bg-gray-200 mr-6 xl:mr-8"></div>
               
               {/* CTA Button */}
               <Link
                 to="/login"
-                className="px-3 py-2 text-xs font-medium text-oasis-blue hover:text-white border border-oasis-blue/30 hover:border-oasis-blue rounded-lg transition-all duration-200 font-body hover:bg-oasis-blue"
+                className="px-3 py-2 text-xs font-medium text-oasis-blue-med hover:text-white border border-oasis-blue-med/30 hover:border-oasis-blue-med rounded-lg transition-all duration-200 font-body hover:bg-oasis-blue-med"
               >
                 Oasis MED
               </Link>
@@ -152,7 +156,7 @@ const Navbar = () => {
               </button>
               <Link
                 to="/login"
-                className="w-full block text-center px-4 py-3 text-sm font-medium text-oasis-blue hover:text-white border border-oasis-blue hover:bg-oasis-blue rounded-lg transition-all duration-200 font-body mt-6"
+                className="w-full block text-center px-4 py-3 text-sm font-medium text-oasis-blue-med hover:text-white border border-oasis-blue-med hover:bg-oasis-blue-med rounded-lg transition-all duration-200 font-body mt-6"
               >
                 Oasis MED
               </Link>
