@@ -9,7 +9,7 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     if (username === 'oasismed' && password === 'unicornio') {
-      window.location.href = 'https://dashboard-oasis-v2.netlify.app/';
+      window.location.href = 'https://oasis-med.oasisagx.com/';
     } else {
       setError('Invalid username or password');
     }
