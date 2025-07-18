@@ -62,7 +62,7 @@ const Login: React.FC = () => {
           </div>
         </div>
         <p className="text-center text-gray-400 text-xs mt-8">
-          &copy; 2024 Oasis AGX. Todos os direitos reservados.
+          &copy; 2025 Oasis AGX. Todos os direitos reservados.
         </p>
       </div>
     </section>

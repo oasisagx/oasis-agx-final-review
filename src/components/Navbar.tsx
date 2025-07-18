@@ -16,16 +16,23 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbar = document.querySelector('.navbar');
-      const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
-      const elementPosition = element.offsetTop - navbarHeight;
-      
+    if (sectionId === 'contact') {
       window.scrollTo({
-        top: elementPosition,
+        top: document.body.scrollHeight,
         behavior: 'smooth'
       });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
+        const elementPosition = element.offsetTop - navbarHeight;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -76,7 +83,7 @@ const Navbar = () => {
                   Quem Somos
                 </button>
                 <button
-                  onClick={() => scrollToSection('about')}
+                  onClick={() => scrollToSection('contact')}
                   className="text-text-body hover:text-oasis-blue transition-colors font-medium font-body text-sm xl:text-base"
                 >
                   Contato
@@ -149,7 +156,7 @@ const Navbar = () => {
                 Quem Somos
               </button>
               <button
-                onClick={() => scrollToSection('about')}
+                onClick={() => scrollToSection('contact')}
                 className="block w-full text-left py-4 text-lg font-medium text-text-body hover:text-oasis-blue transition-colors font-body border-b border-border-light"
               >
                 Contato

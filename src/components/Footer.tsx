@@ -3,16 +3,23 @@ import { Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbar = document.querySelector('.navbar');
-      const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
-      const elementPosition = element.offsetTop - navbarHeight;
-      
+    if (sectionId === 'contact') {
       window.scrollTo({
-        top: elementPosition,
+        top: document.body.scrollHeight,
         behavior: 'smooth'
       });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
+        const elementPosition = element.offsetTop - navbarHeight;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -21,7 +28,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative z-50 bg-gray-900 text-white py-8 sm:py-12">
+    <footer id="contact" className="relative z-50 bg-gray-900 text-white py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8">
           {/* Left side - Logo and Copyright */}
@@ -35,7 +42,7 @@ const Footer = () => {
               <span className="text-lg sm:text-xl font-bold font-heading">Oasis</span>
             </div>
             <p className="text-gray-400 text-xs sm:text-sm mb-1 sm:mb-2 font-body">
-              © 2024 Oasis. Todos os direitos reservados.
+              © 2025 Oasis. Todos os direitos reservados.
             </p>
             <p className="text-gray-500 text-xs sm:text-sm font-medium font-body">
               Inteligência Artificial. Resultados Reais.
@@ -69,7 +76,7 @@ const Footer = () => {
               Quem Somos
             </button>
             <button
-              onClick={() => scrollToSection('about')}
+              onClick={() => scrollToSection('contact')}
               className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm font-body"
             >
               Contato
