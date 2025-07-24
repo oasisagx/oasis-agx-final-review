@@ -1,5 +1,5 @@
 import { MessageCircle, BarChart3, Target, Calendar, GraduationCap, MessageSquare, Play, Send, Bot } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface Message {
   id: string;
@@ -20,6 +20,21 @@ export function Features() {
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
+    const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToBottom = () => {
+        if (messagesContainerRef.current) {
+            const { scrollHeight, clientHeight } = messagesContainerRef.current;
+            messagesContainerRef.current.scrollTop = scrollHeight - clientHeight;
+        }
+    };
+
+    useEffect(() => {
+        // Only scroll when a new message is added, not on initial load
+        if (messages.length > 1) {
+            scrollToBottom();
+        }
+    }, [messages, isTyping]);
     
     // Load Vimeo player script
     useEffect(() => {
@@ -39,25 +54,29 @@ export function Features() {
     }, [showVideo]);
 
     const sendToWebhook = async (userMessage: string) => {
+        const webhookUrl = 'https://kit-75xsi-n8n.a3.hubai.touk.io/webhook/d21b6392-c0a2-492c-9622-0f8d70122ce8';
+
         try {
-            // Simulate API call with timeout for better UX
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-            
-            // For demo purposes, return simulated responses
-            clearTimeout(timeoutId);
-            
-            // Simulate different responses based on message content
-            const lowerMessage = userMessage.toLowerCase();
-            if (lowerMessage.includes('preço') || lowerMessage.includes('custo')) {
-                return 'Nossos planos são personalizados para cada empresa. Que tal agendar uma conversa para entender melhor suas necessidades?';
-            } else if (lowerMessage.includes('agente') || lowerMessage.includes('ia')) {
-                return 'Nossos agentes de IA podem automatizar atendimento, análise de dados, qualificação de leads e muito mais! Gostaria de ver uma demonstração?';
-            } else if (lowerMessage.includes('contato') || lowerMessage.includes('falar')) {
-                return 'Você pode falar diretamente com nossa equipe pelo WhatsApp: +55 11 91868-8001 ou email: hello@oasisagx.com';
-            } else {
-                return 'Entendi! Nossa equipe especializada pode te ajudar melhor. Que tal agendar uma conversa rápida para entender como posso te auxiliar?';
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: userMessage,
+                    userId: 'website-visitor',
+                    timestamp: new Date().toISOString(),
+                    source: 'website'
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+            const data = await response.json();
+            // Assuming the webhook returns a JSON with a "response" field
+            return data.response || 'Obrigado por sua mensagem! Recebemos e retornaremos em breve.';
         } catch (error) {
             console.error('Webhook error:', error);
             return 'Nossa equipe entrará em contato em breve! Enquanto isso, pode me chamar no WhatsApp: +55 11 91868-8001';
@@ -213,7 +232,7 @@ export function Features() {
                 <div className="relative mx-auto max-w-none scroll-animate">
                     <div className="grid grid-cols-1 lg:grid-cols-7 gap-0 border border-gray-200 rounded-2xl sm:rounded-3xl overflow-hidden shadow-soft h-[540px]">
                         {/* Chat da Cleo - Metade da Largura Total */}
-                        <div className="h-full lg:col-span-5 bg-card-background border-r border-gray-200 lg:border-r flex flex-col">
+                        <div className="h-full lg:col-span-5 bg-card-background border-r border-gray-200 lg:border-r flex flex-col min-h-0">
                             {/* Header do Chat - Apple Style */}
                             <div className="bg-oasis-blue text-white px-4 py-3 flex items-center gap-3 border-b border-oasis-blue-dark flex-shrink-0">
                                 <div className="w-8 sm:w-10 h-8 sm:h-10 bg-white/20 rounded-xl flex items-center justify-center">
@@ -230,7 +249,7 @@ export function Features() {
                             </div>
 
                             {/* Messages Container - Apple Style */}
-                            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                            <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
                                 {messages.map((message) => (
                                     <div
                                         key={message.id}
