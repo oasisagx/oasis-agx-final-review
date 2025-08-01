@@ -55,6 +55,18 @@ export function Features() {
 
     const sendToWebhook = async (userMessage: string) => {
         const webhookUrl = 'https://kit-75xsi-n8n.a3.hubai.touk.io/webhook/d21b6392-c0a2-492c-9622-0f8d70122ce8';
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const payload = {
+            message: userMessage,
+            userId: 'website-visitor',
+            timestamp: new Date().toISOString(),
+            source: 'website'
+        };
+
+        console.log('Sending to webhook:', webhookUrl);
+        console.log('Payload:', JSON.stringify(payload, null, 2));
 
         try {
             const response = await fetch(webhookUrl, {
@@ -62,23 +74,29 @@ export function Features() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    message: userMessage,
-                    userId: 'website-visitor',
-                    timestamp: new Date().toISOString(),
-                    source: 'website'
-                }),
+                body: JSON.stringify(payload),
+                signal: controller.signal
             });
 
+            clearTimeout(timeoutId);
+
             if (!response.ok) {
+                console.error('Webhook response not OK:', { status: response.status, statusText: response.statusText });
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
+            console.log('Webhook response data:', data);
+            
             // Assuming the webhook returns a JSON with a "response" field
             return data.response || 'Obrigado por sua mensagem! Recebemos e retornaremos em breve.';
         } catch (error) {
-            console.error('Webhook error:', error);
+            clearTimeout(timeoutId);
+            if (error instanceof Error && error.name === 'AbortError') {
+                console.error('Webhook timeout:', error);
+                return 'Desculpe, o serviço está demorando muito para responder. Por favor, tente novamente mais tarde ou entre em contato pelo WhatsApp: +55 11 91868-8001';
+            }
+            console.error('Full webhook error:', error);
             return 'Nossa equipe entrará em contato em breve! Enquanto isso, pode me chamar no WhatsApp: +55 11 91868-8001';
         }
     };
