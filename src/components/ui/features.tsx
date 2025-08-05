@@ -9,7 +9,7 @@ export function Features() {
     const initialMessages: ChatMessage[] = [
         {
             id: '1',
-            content: 'Olá, Eu sou a Cleo, representante virtual da Oasis. Estou aqui para te ajudar a entender e aplicar inteligência artificial de forma simples, prática, e acessível!',
+            content: 'Sou a Cleo, representante virtual da Oasis. Estou aqui para te ajudar!',
             role: 'assistant',
             timestamp: new Date()
         }
