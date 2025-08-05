@@ -1,26 +1,21 @@
-import { MessageCircle, BarChart3, Target, Calendar, GraduationCap, MessageSquare, Play, Send, Bot } from 'lucide-react'
+import { MessageCircle, BarChart3, Target, Calendar, GraduationCap, MessageSquare, Send, Bot } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
-
-interface Message {
-  id: string;
-  text: string;
-  sender: 'user' | 'cleo';
-  timestamp: Date;
-}
+import { useChat, ChatMessage } from '@/lib/useChat';
 
 export function Features() {
-    const [showVideo, setShowVideo] = useState(false)
-    const [messages, setMessages] = useState<Message[]>([
+    const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+    const [inputValue, setInputValue] = useState('');
+
+    const initialMessages: ChatMessage[] = [
         {
             id: '1',
-            text: 'Olá, Eu sou a Cleo, representante virtual da Oasis. Estou aqui para te ajudar a entender e aplicar inteligência artificial de forma simples, prática, e acessível!',
-            sender: 'cleo',
+            content: 'Olá, Eu sou a Cleo, representante virtual da Oasis. Estou aqui para te ajudar a entender e aplicar inteligência artificial de forma simples, prática, e acessível!',
+            role: 'assistant',
             timestamp: new Date()
         }
-    ]);
-    const [inputValue, setInputValue] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
-    const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+    ];
+
+    const { messages, isLoading, sendMessage, setMessages } = useChat(initialMessages);
 
     const scrollToBottom = () => {
         if (messagesContainerRef.current) {
@@ -30,117 +25,15 @@ export function Features() {
     };
 
     useEffect(() => {
-        // Only scroll when a new message is added, not on initial load
         if (messages.length > 1) {
             scrollToBottom();
         }
-    }, [messages, isTyping]);
-    
-    // Load Vimeo player script
-    useEffect(() => {
-        if (showVideo) {
-            const script = document.createElement('script');
-            script.src = 'https://player.vimeo.com/api/player.js';
-            script.async = true;
-            document.head.appendChild(script);
-            
-            return () => {
-                const existingScript = document.querySelector('script[src="https://player.vimeo.com/api/player.js"]');
-                if (existingScript) {
-                    document.head.removeChild(existingScript);
-                }
-            };
-        }
-    }, [showVideo]);
+    }, [messages, isLoading]);
 
-    const sendToWebhook = async (userMessage: string) => {
-        const webhookUrl = 'https://kit-75xsi-n8n.a3.hubai.touk.io/webhook/d21b6392-c0a2-492c-9622-0f8d70122ce8';
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-        const payload = {
-            message: userMessage,
-            userId: 'website-visitor',
-            timestamp: new Date().toISOString(),
-            source: 'website'
-        };
-
-        console.log('Sending to webhook:', webhookUrl);
-        console.log('Payload:', JSON.stringify(payload, null, 2));
-
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-                signal: controller.signal
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                console.error('Webhook response not OK:', { status: response.status, statusText: response.statusText });
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            console.log('Webhook response data:', data);
-            
-            // Assuming the webhook returns a JSON with a "response" field
-            return data.response || 'Obrigado por sua mensagem! Recebemos e retornaremos em breve.';
-        } catch (error) {
-            clearTimeout(timeoutId);
-            if (error instanceof Error && error.name === 'AbortError') {
-                console.error('Webhook timeout:', error);
-                return 'Desculpe, o serviço está demorando muito para responder. Por favor, tente novamente mais tarde ou entre em contato pelo WhatsApp: +55 11 91868-8001';
-            }
-            console.error('Full webhook error:', error);
-            return 'Nossa equipe entrará em contato em breve! Enquanto isso, pode me chamar no WhatsApp: +55 11 91868-8001';
-        }
-    };
-
-    const handleSendMessage = async () => {
-        if (!inputValue.trim()) return;
-
-        const userMessage: Message = {
-            id: Date.now().toString(),
-            text: inputValue,
-            sender: 'user',
-            timestamp: new Date()
-        };
-
-        setMessages(prev => [...prev, userMessage]);
-        const currentInput = inputValue;
-        setInputValue('');
-        setIsTyping(true);
-
-        // Send to N8N webhook
-        try {
-            const response = await sendToWebhook(currentInput);
-            
-            setTimeout(() => {
-                const cleoResponse: Message = {
-                    id: (Date.now() + 1).toString(),
-                    text: response,
-                    sender: 'cleo',
-                    timestamp: new Date()
-                };
-                setMessages(prev => [...prev, cleoResponse]);
-                setIsTyping(false);
-            }, 1500);
-        } catch (error) {
-            setTimeout(() => {
-                const errorResponse: Message = {
-                    id: (Date.now() + 1).toString(),
-                    text: 'Desculpe, tive um problema técnico. Nossa equipe entrará em contato em breve!',
-                    sender: 'cleo',
-                    timestamp: new Date()
-                };
-                setMessages(prev => [...prev, errorResponse]);
-                setIsTyping(false);
-            }, 1500);
+    const handleSendMessage = () => {
+        if (inputValue.trim()) {
+            sendMessage(inputValue);
+            setInputValue('');
         }
     };
 
@@ -271,18 +164,18 @@ export function Features() {
                                 {messages.map((message) => (
                                     <div
                                         key={message.id}
-                                        className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                     >
                                         <div
                                             className={`max-w-sm px-5 py-3 rounded-2xl ${
-                                                message.sender === 'user'
+                                                message.role === 'user'
                                                     ? 'bg-oasis-blue text-white shadow-md'
                                                     : 'bg-card-background text-gray-900 shadow-sm border border-gray-100'
                                             }`}
                                         >
-                                            <p className="text-sm font-body leading-relaxed">{message.text}</p>
+                                            <p className="text-sm font-body leading-relaxed">{message.content}</p>
                                             <p className={`text-xs mt-1 font-body ${
-                                                message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
+                                                message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
                                             }`}>
                                                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </p>
@@ -290,7 +183,7 @@ export function Features() {
                                     </div>
                                 ))}
                                 
-                                {isTyping && (
+                                {isLoading && (
                                     <div className="flex justify-start">
                                         <div className="bg-card-background px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
                                             <div className="flex space-x-1">
@@ -316,7 +209,7 @@ export function Features() {
                                     />
                                     <button
                                         onClick={handleSendMessage}
-                                        disabled={!inputValue.trim()}
+                                        disabled={!inputValue.trim() || isLoading}
                                         className="w-11 h-11 bg-oasis-blue text-white rounded-2xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed btn-hover-lift shadow-md hover:shadow-lg transition-all"
                                     >
                                         <Send className="w-5 h-5" />
