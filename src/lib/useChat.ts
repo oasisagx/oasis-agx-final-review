@@ -1,5 +1,13 @@
 import { useState } from 'react';
 
+const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+console.log("Variáveis de ambiente disponíveis:", import.meta.env);
+
+if (!webhookUrl) {
+  console.error("ERRO CRÍTICO: VITE_WEBHOOK_URL não está definida nas variáveis de ambiente do build.");
+  throw new Error("VITE_WEBHOOK_URL não está definida. O deploy não pode continuar.");
+}
+
 export interface ChatMessage {
   id: string;
   content: string;
@@ -29,14 +37,6 @@ export const useChat = (initialMessages: ChatMessage[] = []) => {
     console.log("Iniciando envio para o webhook...");
 
     try {
-      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
-      console.log("URL do Webhook:", webhookUrl);
-
-      if (!webhookUrl) {
-        console.error("ERRO: VITE_WEBHOOK_URL não está definida no arquivo .env");
-        throw new Error("VITE_WEBHOOK_URL não está definida no arquivo .env");
-      }
-
       const payload = {
         message: content,
         userId: 'website-visitor',
