@@ -13,4 +13,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  define: {
+    'import.meta.env.VITE_WEBHOOK_URL': JSON.stringify(process.env.VITE_WEBHOOK_URL),
+  },
 });
