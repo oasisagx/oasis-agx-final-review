@@ -49,7 +49,7 @@ function App() {
             <Features />
             <ConsultancySection />
             <TestimonialSection />
-            <AboutSection />
+            {/* <AboutSection /> */}
             <Footer />
             <FloatingButtons />
           </AuroraBackground>
