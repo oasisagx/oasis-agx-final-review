@@ -4,6 +4,7 @@ import { Heart, Mail, MessageCircle, Instagram } from 'lucide-react';
 import { AnimatedTeam } from '@/components/ui/animated-team';
 
 const AboutSection = () => {
+  const showTeamSection = false;
   const teamMembers = [
     {
       quote: "Empreendedor no ramo da arte e da tecnologia. Sua trajetória profissional começou aos 17 anos com a engenharia, posteriormente transitando pelo mundo criativo. Há alguns anos iniciou-se no empreendedorismo, algo que não larga mais. Seu propósito é prover liberdade através da tecnologia e do conhecimento além de embelezar, através da arte, a vida liberta.\n\nAcadêmico: Engenharia Mecânica-Aeronáutica (ITA) + Produção e Engenharia de Áudio (DipBR)\nProfissional: Indústria (Cebrace), Mercado Financeiro (W1), Bioenergia (BNC/SA), Publicidade e Áudio (S de Samba)\nNegócios: fundador da MOOS Audio, cofundador da Ximex AI e fundador da Oasis\nEspecializações: Consultoria em Inteligência Artificial (Siberia Institute) e AI Business Architecture (Siberia Institute)",
@@ -54,18 +55,20 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Equipe - Grid das imagens como estava */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16 scroll-animate relative z-10"
-        >
-          <AnimatedTeam 
-            teamMembers={teamMembers} 
-            autoplay={true}
-            className="px-0"
-          />
-        </motion.div>
+        {showTeamSection && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-16 scroll-animate relative z-10"
+          >
+            <AnimatedTeam 
+              teamMembers={teamMembers} 
+              autoplay={true}
+              className="px-0"
+            />
+          </motion.div>
+        )}
 
         {/* Texto embaixo da equipe */}
         <motion.div
