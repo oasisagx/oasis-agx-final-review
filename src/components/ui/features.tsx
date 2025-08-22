@@ -140,7 +140,7 @@ export function Features() {
                 </div>
 
                 {/* Chat e Vídeo - Mesma Proporção da Grid Acima */}
-                <div className="relative mx-auto max-w-none scroll-animate">
+                <div className="relative mx-auto max-w-none scroll-animate hidden">
                     <div className="grid grid-cols-1 lg:grid-cols-7 gap-0 border border-gray-200 rounded-2xl sm:rounded-3xl overflow-hidden shadow-soft h-[540px]">
                         {/* Chat da Cleo - Metade da Largura Total */}
                         <div className="h-full lg:col-span-5 bg-card-background border-r border-gray-200 lg:border-r flex flex-col min-h-0">
