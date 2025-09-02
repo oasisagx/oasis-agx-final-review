@@ -15,6 +15,12 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-50">
       <div className="relative z-10 max-w-md mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -37,6 +43,7 @@ const Login: React.FC = () => {
                 placeholder="seu usuário"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={handleKeyPress}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-oasis-blue/50 transition-all"
               />
             </div>
@@ -47,6 +54,7 @@ const Login: React.FC = () => {
                 placeholder="sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeyPress}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-oasis-blue/50 transition-all"
               />
             </div>
